@@ -4,6 +4,7 @@ CREATE TABLE Client (
     Prenom VARCHAR(50),
     Mail VARCHAR(100),
     Tel VARCHAR(10), 
+    mdp TEXT,
     create_at DATETIME DEFAULT CURRENT_TIMESTAMP
 );
 

@@ -150,6 +150,53 @@ public class ClientGestion
         }
     }
 
+    public int ConnectClient()
+    {
+        Console.WriteLine("=== Connexion ===");
+        Console.WriteLine("Entrer votre mail : ");
+        string? mail = Console.ReadLine();
+        Console.WriteLine("Entrer votre mot de passe : ");
+        string? password = Console.ReadLine();
+
+        string hashedPassword = Convert.ToBase64String(SHA256.HashData(Encoding.UTF8.GetBytes(password)));
+
+        using (var context = new BankAccountContext())
+        {
+            var client = context.Clients.Where(x => x.Mail == mail && x.Mdp == hashedPassword).FirstOrDefault();
+            if (client == null)
+            {
+                Console.WriteLine("Identifiant ou mot de passe incorrect");
+                return 1;
+            }
+
+            Console.WriteLine($"Bienvenue {client.Prenom} {client.Nom}");
+            return client.IdClient;
+        }
+        
+    }
+
+    public void ShowAccounts(int clientId)
+    {
+        using (var context = new BankAccountContext())
+        {
+            var comptes = context.Comptes.Where(x => x.IdClient == clientId).ToList();
+
+            if (comptes.Count == 0)
+            {
+                Console.WriteLine("Aucun compte trouvé pour ce client");
+                return;
+            }
+
+            Console.WriteLine("Vos comptes :");
+            foreach (var compte in comptes)
+            {
+                 Console.WriteLine($"- {compte.Type} : {compte.Solde} EUR (RIB: {compte.Rib})");
+            }
+        }
+    }
+
+
+
 //     public async Task<int> GetTransfert(int Idreceveur, int idDonneur)
 //     {
 //         using (var context = new BankAccountContext())

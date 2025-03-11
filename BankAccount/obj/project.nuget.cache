@@ -1,5 +1,6 @@
 {
   "version": 2,
+<<<<<<< HEAD
   "dgSpecHash": "6rjg7d2tGl8=",
   "success": true,
   "projectFilePath": "/Users/hugogalley/Documents/Cours EPSI/Cs/BankAccount/BankAccount/BankAccount.csproj",
@@ -48,5 +49,11 @@
     "/Users/hugogalley/.nuget/packages/system.text.json/9.0.2/system.text.json.9.0.2.nupkg.sha512",
     "/Users/hugogalley/.nuget/packages/system.threading.channels/7.0.0/system.threading.channels.7.0.0.nupkg.sha512"
   ],
+=======
+  "dgSpecHash": "V90a8zAPBV0=",
+  "success": true,
+  "projectFilePath": "/Users/axelflahaut/BankAccount/BankAccount/BankAccount.csproj",
+  "expectedPackageFiles": [],
+>>>>>>> 759e4df9cae40342497c26482b971c6baa195325
   "logs": []
 }

@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 ﻿using BankAccount;
 
 class Program
@@ -23,3 +24,6 @@ class Program
         
     }
 }
+=======
+﻿
+>>>>>>> 759e4df9cae40342497c26482b971c6baa195325

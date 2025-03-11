@@ -2913,19 +2913,19 @@
     ]
   },
   "packageFolders": {
-    "/Users/hugogalley/.nuget/packages/": {}
+    "/Users/axelflahaut/.nuget/packages/": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Users/hugogalley/Documents/Cours EPSI/Cs/BankAccount/BankAccount/BankAccount.csproj",
+      "projectUniqueName": "/Users/axelflahaut/BankAccount/BankAccount/BankAccount.csproj",
       "projectName": "BankAccount",
-      "projectPath": "/Users/hugogalley/Documents/Cours EPSI/Cs/BankAccount/BankAccount/BankAccount.csproj",
-      "packagesPath": "/Users/hugogalley/.nuget/packages/",
-      "outputPath": "/Users/hugogalley/Documents/Cours EPSI/Cs/BankAccount/BankAccount/obj/",
+      "projectPath": "/Users/axelflahaut/BankAccount/BankAccount/BankAccount.csproj",
+      "packagesPath": "/Users/axelflahaut/.nuget/packages/",
+      "outputPath": "/Users/axelflahaut/BankAccount/BankAccount/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "/Users/hugogalley/.nuget/NuGet/NuGet.Config"
+        "/Users/axelflahaut/.nuget/NuGet/NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net8.0"

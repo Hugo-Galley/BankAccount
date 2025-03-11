@@ -9,7 +9,7 @@ class Program
         switch (choice)
         {
             case 1:
-                gestionClient.CreateClient();
+                gestionClient.DepositMoney(4);
                 break;
             case 2:
                 Console.WriteLine("Ya R");

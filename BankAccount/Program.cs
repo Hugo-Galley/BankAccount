@@ -1,6 +1,4 @@
-<<<<<<< HEAD
-﻿using BankAccount;
-
+using BankAccount;
 class Program
 {
     public static void Main()
@@ -24,6 +22,4 @@ class Program
         
     }
 }
-=======
-﻿
->>>>>>> 759e4df9cae40342497c26482b971c6baa195325
+

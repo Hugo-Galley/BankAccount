@@ -1,7 +1,6 @@
 {
   "version": 2,
-<<<<<<< HEAD
-  "dgSpecHash": "6rjg7d2tGl8=",
+  "dgSpecHash": "S1ICL/yN+Wk=",
   "success": true,
   "projectFilePath": "/Users/hugogalley/Documents/Cours EPSI/Cs/BankAccount/BankAccount/BankAccount.csproj",
   "expectedPackageFiles": [
@@ -20,6 +19,7 @@
     "/Users/hugogalley/.nuget/packages/microsoft.entityframeworkcore.analyzers/9.0.2/microsoft.entityframeworkcore.analyzers.9.0.2.nupkg.sha512",
     "/Users/hugogalley/.nuget/packages/microsoft.entityframeworkcore.design/9.0.2/microsoft.entityframeworkcore.design.9.0.2.nupkg.sha512",
     "/Users/hugogalley/.nuget/packages/microsoft.entityframeworkcore.relational/9.0.2/microsoft.entityframeworkcore.relational.9.0.2.nupkg.sha512",
+    "/Users/hugogalley/.nuget/packages/microsoft.entityframeworkcore.tools/10.0.0-preview.1.25081.1/microsoft.entityframeworkcore.tools.10.0.0-preview.1.25081.1.nupkg.sha512",
     "/Users/hugogalley/.nuget/packages/microsoft.extensions.caching.abstractions/9.0.2/microsoft.extensions.caching.abstractions.9.0.2.nupkg.sha512",
     "/Users/hugogalley/.nuget/packages/microsoft.extensions.caching.memory/9.0.2/microsoft.extensions.caching.memory.9.0.2.nupkg.sha512",
     "/Users/hugogalley/.nuget/packages/microsoft.extensions.configuration.abstractions/9.0.2/microsoft.extensions.configuration.abstractions.9.0.2.nupkg.sha512",
@@ -49,11 +49,5 @@
     "/Users/hugogalley/.nuget/packages/system.text.json/9.0.2/system.text.json.9.0.2.nupkg.sha512",
     "/Users/hugogalley/.nuget/packages/system.threading.channels/7.0.0/system.threading.channels.7.0.0.nupkg.sha512"
   ],
-=======
-  "dgSpecHash": "V90a8zAPBV0=",
-  "success": true,
-  "projectFilePath": "/Users/axelflahaut/BankAccount/BankAccount/BankAccount.csproj",
-  "expectedPackageFiles": [],
->>>>>>> 759e4df9cae40342497c26482b971c6baa195325
   "logs": []
 }

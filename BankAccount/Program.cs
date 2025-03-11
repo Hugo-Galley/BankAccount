@@ -1,7 +1,7 @@
 using BankAccount;
 class Program
 {
-    public static void Main()
+    public static async Task Main()
     {
         Menu menu = new Menu();
         ClientGestion gestionClient = new ClientGestion();
@@ -9,10 +9,10 @@ class Program
         switch (choice)
         {
             case 1:
-                gestionClient.DepositMoney(4);
+                await gestionClient.MoveMoney(4,1);
                 break;
             case 2:
-                Console.WriteLine("Ya R");
+                await gestionClient.MoveMoney(4,1);
                 break;
             default:
                 Console.WriteLine("y'a rien");

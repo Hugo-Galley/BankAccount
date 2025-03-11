@@ -1,12 +1,13 @@
 using System.Security.Cryptography;
 using System.Text;
 using BankAccount.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace BankAccount;
 
 public class ClientGestion
 {
-    public void CreateClient()
+    public async Task CreateClient()
     {
         Console.WriteLine("Entrer votre prénom :");
         string? name = Console.ReadLine();
@@ -29,19 +30,20 @@ public class ClientGestion
         };
         using (var context = new BankAccountContext())
         {
-            context.Clients.Add(client);
-            context.SaveChanges();
+            await context.Clients.AddAsync(client);
+            await context.SaveChangesAsync();
         }
-        CreateAccount();
+
+        await CreateAccount();
     }
 
-    public void CreateAccount()
+    public async Task CreateAccount()
     {
         int choice;
         string type = "Unknow";
         int solde;
         decimal interet = 0.0m;
-        
+
         Console.WriteLine("Quelle type de compte souhaiter vous ?");
         Console.WriteLine("1 - Compte Courant");
         Console.WriteLine("2 - Compte Epargne");
@@ -50,6 +52,7 @@ public class ClientGestion
         {
             Console.WriteLine("Veuillez entrer un nombre valide");
         }
+
         switch (choice)
         {
             case 1:
@@ -63,64 +66,94 @@ public class ClientGestion
             default:
                 Console.WriteLine("Choix non disponible");
                 break;
-                
+
         }
+
         Console.WriteLine("Entrer le montant du dépôt initial : ");
         while (!int.TryParse(Console.ReadLine(), out solde))
         {
             Console.WriteLine("Veuillez entrer un nombre valide");
         }
+
         using (var context = new BankAccountContext())
         {
-            var clientId = context.Clients.OrderByDescending(x => x.IdClient).FirstOrDefault().IdClient;
-        Compte compte = new Compte()
-        {
-            IdClient = clientId,
-            Type = type,
-            Solde = solde,
-            CreateAt = DateTime.Now,
-            Interet = interet,
-            Rib = Guid.NewGuid()
-        };
-        context.Comptes.Add(compte);
-        context.SaveChanges();
+            var clientId = context.Clients.OrderByDescending(x => x.IdClient).FirstOrDefaultAsync().Result.IdClient;
+            Compte compte = new Compte()
+            {
+                IdClient = clientId,
+                Type = type,
+                Solde = solde,
+                CreateAt = DateTime.Now,
+                Interet = interet,
+                Rib = Guid.NewGuid()
+            };
+            await context.Comptes.AddAsync(compte);
+            await context.SaveChangesAsync();
         }
     }
 
-    public int DepositMoney(int clientId)
+    public async Task<int> MoveMoney(int clientId, int action)
     {
         int choice;
         int deposit;
-        
+
         using (var context = new BankAccountContext())
         {
             List<Compte> listComptes = context.Comptes
                 .Where(x => x.IdClient == clientId)
                 .ToList();
-            if (! listComptes.Any())
+            if (!listComptes.Any())
             {
                 Console.WriteLine("Aucun compte trouvé pour se client");
                 return 1;
             }
+
             Console.WriteLine("Sur quelle compte voulez vous effectuer le dépôt ?");
             for (int i = 0; i < listComptes.Count; i++)
             {
                 Console.WriteLine($"{i}. Compte {listComptes[i].Type} au solde de {listComptes[i].Solde}");
             }
+
             while (!int.TryParse(Console.ReadLine(), out choice))
             {
                 Console.WriteLine("Veuillez entrer un nombre valide");
             }
+
             Console.WriteLine("Combien voulez vous deposer ?");
             while (!int.TryParse(Console.ReadLine(), out deposit))
             {
                 Console.WriteLine("Veuillez entrer un nombre valide");
             }
-            context.Comptes.Where(x => x.IdCompte == listComptes[choice].IdCompte)
-                .FirstOrDefault().Solde += deposit;
+
+            switch (action)
+            {
+                case 1:
+                    context.Comptes.Where(x => x.IdCompte == listComptes[choice].IdCompte)
+                        .FirstOrDefault().Solde += deposit;
+                    Console.WriteLine(
+                        $"Un depot de {deposit} à bien été effectué sur le compte {listComptes[choice].Rib}");
+                    break;
+                case 2:
+                    context.Comptes.Where(x => x.IdCompte == listComptes[choice].IdCompte)
+                        .FirstOrDefault().Solde -= deposit;
+                    Console.WriteLine(
+                        $"Un retrait de {deposit} à bien été effectué sur le compte {listComptes[choice].Rib}");
+                    break;
+                default:
+                    Console.WriteLine("Operation impossible");
+                    break;
+
+            }
+
             context.SaveChanges();
-            Console.WriteLine($"Un depot de {deposit} à bien été effectué sur le compte {listComptes[choice].Rib}");
             return 1;
         }
     }
+
+//     public async Task<int> GetTransfert(int Idreceveur, int idDonneur)
+//     {
+//         using (var context = new BankAccountContext())
+//         {
+//             var donneurId = context.Comptes.Where(x => x.IdClient == idDonneur);
+//
 }

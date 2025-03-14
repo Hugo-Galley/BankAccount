@@ -16,6 +16,6 @@ build_property.EnforceExtendedAnalyzerRules =
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = BankAccount
-build_property.ProjectDir = /Users/axelflahaut/Desktop/BankAccount/BankAccount/
+build_property.ProjectDir = /Users/hugogalley/Documents/Cours EPSI/Cs/BankAccount/BankAccount/
 build_property.EnableComHosting = 
 build_property.EnableGeneratedComInterfaceComImportInterop = 

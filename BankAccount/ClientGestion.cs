@@ -301,17 +301,59 @@ public class ClientGestion
             Console.WriteLine("Vos comptes :");
             foreach (var compte in comptes)
             {
-                 Console.WriteLine($"- {compte.Type} : {compte.Solde} EUR (RIB: {compte.Rib})");
+                 Console.WriteLine($"- {compte.Type} : {compte.Solde} EUR (Numéro de compte: {compte.NumeroCompte})");
             }
         }
     }
 
 
 
-//     public async Task<int> GetTransfert(int Idreceveur, int idDonneur)
-//     {
-//         using (var context = new BankAccountContext())
-//         {
-//             var donneurId = context.Comptes.Where(x => x.IdClient == idDonneur);
-//
+    public async Task<int> GetTransfert(int idDonneur)
+    {
+        int choice;
+        int transfertAmount;
+        string numAccount;
+        using (var context = new BankAccountContext())
+        {
+            var listOfAccount = await context.Comptes.Where(x => x.IdClient == idDonneur).ToListAsync();
+
+            Console.WriteLine("Depuis quelle compte voulez vous effectuer le virement");
+            for (int i = 0; i < listOfAccount.Count; i++)
+            {
+                Console.WriteLine($"{i}. Compte {listOfAccount[i].Type} au solde de {listOfAccount[i].Solde}");
+            }
+            while (!int.TryParse(Console.ReadLine(), out choice) || choice < 0 || choice >= listOfAccount.Count)
+            {
+                Console.WriteLine("Veuillez entrer un index valide");
+            }
+            var sender = listOfAccount[choice];
+            
+            Console.WriteLine("Quelle est le numéro de compte du destinataire ?");
+            numAccount = Console.ReadLine();
+            
+            Console.WriteLine("Quelle est le montant de votre transfert ?");
+            while (!int.TryParse(Console.ReadLine(), out transfertAmount) || transfertAmount < 0 || transfertAmount >= sender.Solde)
+            {
+                Console.WriteLine("Veuillez entrer un montant valide");
+            }
+            
+            var receiver = await context.Comptes.FirstOrDefaultAsync(x => x.NumeroCompte == numAccount);
+            if (receiver != null)
+            {
+                receiver.Solde += transfertAmount;
+                sender.Solde -= transfertAmount;
+                context.Comptes.Update(receiver);
+                context.Comptes.Update(sender);
+                await context.SaveChangesAsync();
+                Console.WriteLine("Transfert effectué avec succés");
+            }
+            else
+            {
+                Console.WriteLine("Echec du transfert");
+            }
+
+        }
+        return 1;
+    }
+
 }

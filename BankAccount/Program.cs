@@ -51,9 +51,9 @@ class Program
         await gestion.MoveMoney(clientId, 2);
         break;
     case 3:
-            Console.WriteLine("Fonctionnalité gérée par un autre développeur");
-
+        await gestion.GetTransfert(clientId);
         break;
+    
     case 4:
         gestion.ShowAccounts(clientId);
         break;

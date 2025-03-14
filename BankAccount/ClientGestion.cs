@@ -157,11 +157,32 @@ public class ClientGestion
                     }
                 }
             }
+            if (operation.TypeOperation == "Transfert")
+            {
+                if (operation.Donneur == compteId)
+                {
+                    direction = "➡️ Transfert sortant";
+                    var compteDestination = context.Comptes.FirstOrDefault(c => c.IdCompte == operation.Receveur);
+                    if (compteDestination != null)
+                    {
+                        detail = $" vers compte {compteDestination.Type}";
+                    }
+                }
+                else
+                {
+                    direction = "⬅️ Transfert entrant";
+                    var compteSource = context.Comptes.FirstOrDefault(c => c.IdCompte == operation.Donneur);
+                    if (compteSource != null)
+                    {
+                        detail = $" depuis compte {compteSource.Type}";
+                    }
+                }
+            }
             else if (operation.TypeOperation == "Dépôt")
             {
                 direction = "💰 Dépôt";
             }
-            else // Retrait
+            else 
             {
                 direction = "📉 Retrait";
             }
@@ -344,6 +365,15 @@ public class ClientGestion
                 sender.Solde -= transfertAmount;
                 context.Comptes.Update(receiver);
                 context.Comptes.Update(sender);
+                Historique depotHistorique = new Historique
+                {
+                    DateOperation = DateTime.Now,
+                    Montant = transfertAmount,
+                    TypeOperation = "Transfert",
+                    Donneur = sender.IdCompte,  
+                    Receveur = receiver.IdCompte
+                };
+                await context.Historiques.AddAsync(depotHistorique);
                 await context.SaveChangesAsync();
                 Console.WriteLine("Transfert effectué avec succés");
             }

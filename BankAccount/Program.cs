@@ -1,6 +1,6 @@
 using BankAccount; 
 
-class Program  // Suppression de "partial"
+class Program  
 {
     public static async Task Main()
     {
@@ -39,29 +39,31 @@ class Program  // Suppression de "partial"
             {
                 int choix = menu.DisplayChoice();
                 switch (choix)
-                {
-                    case 0:
-                        Console.WriteLine("Au revoir");
-                        clientId = -1;
-                        break;
-                    case 1:
-                        await gestion.MoveMoney(clientId, 1);
-                        break;
-                    case 2:
-                        await gestion.MoveMoney(clientId, 2);
-                        break;
-                    case 3:
-                        // Implémentation du virement à faire
-                        Console.WriteLine("Fonctionnalité de virement non implémentée");
-                        break;
-                    case 4:
-                        // Affichage des comptes/soldes
-                        gestion.ShowAccounts(clientId);
-                        break;
-                    default:
-                        Console.WriteLine("Choix invalide");
-                        break;
-                }
+{
+    case 0:
+        Console.WriteLine("Au revoir");
+        clientId = -1;
+        break;
+    case 1:
+        await gestion.MoveMoney(clientId, 1);
+        break;
+    case 2:
+        await gestion.MoveMoney(clientId, 2);
+        break;
+    case 3:
+            Console.WriteLine("Fonctionnalité gérée par un autre développeur");
+
+        break;
+    case 4:
+        gestion.ShowAccounts(clientId);
+        break;
+    case 5:
+        gestion.ShowHistory(clientId);
+        break;
+    default:
+        Console.WriteLine("Choix invalide");
+        break;
+}
                 Console.WriteLine("Appuyer sur une touche pour continuer");
                 Console.ReadKey();
             }
